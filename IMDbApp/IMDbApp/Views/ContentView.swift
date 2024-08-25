@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  IMDbApp
 //
-//  Created by Jan Kazubski on 24/08/2024.
+//  Created by Jan Kazubski on 25/08/2024.
 //
 
 import SwiftUI
@@ -10,12 +10,9 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            HomeView()
         }
-        .padding()
+        .background(Color.background)
     }
 }
 
