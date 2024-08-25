@@ -10,6 +10,7 @@ import SwiftUI
 struct MovieCardView: View {
     var scale: CGFloat = 1
     let movie: Movie
+    var showTitle: Bool = true
 
     private var cardWidth: CGFloat {
         144.61 * scale
@@ -30,9 +31,11 @@ struct MovieCardView: View {
                 VStack {
                     CustomProgressView()
 
-                    Text(movie.title)
-                        .foregroundStyle(.white)
-                        .padding()
+                    if showTitle {
+                        Text(movie.title)
+                            .foregroundStyle(.white)
+                            .padding()
+                    }
                 }
             }
         }
@@ -53,6 +56,7 @@ struct MovieCardView: View {
             popularity: 166.018,
             posterPath: "",
             releaseDate: "",
+            runtime: 142,
             title: "The Shawshank Redemption",
             video: false,
             voteAverage: 8.705,

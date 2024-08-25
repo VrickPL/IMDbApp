@@ -7,13 +7,12 @@
 
 import Foundation
 
-
 // MARK: - MovieResponse
 struct MovieResponse: Codable {
     let page: Int
     let results: [Movie]
     let totalResults, totalPages: Int
-    
+
     enum CodingKeys: String, CodingKey {
         case page, results
         case totalResults = "total_results"
@@ -31,6 +30,7 @@ struct Movie: Codable, Identifiable {
     let popularity: Double
     let posterPath: String
     let releaseDate: String
+    let runtime: Int?
     let title: String
     let video: Bool
     let voteAverage: Double
@@ -38,17 +38,18 @@ struct Movie: Codable, Identifiable {
 
     enum CodingKeys: String, CodingKey {
         case adult
-                case backdropPath = "backdrop_path"
-                case genreIds = "genre_ids"
-                case id
-                case overview
-                case popularity
-                case posterPath = "poster_path"
-                case releaseDate = "release_date"
-                case title
-                case video
-                case voteAverage = "vote_average"
-                case voteCount = "vote_count"
+        case backdropPath = "backdrop_path"
+        case genreIds = "genre_ids"
+        case id
+        case overview
+        case popularity
+        case posterPath = "poster_path"
+        case releaseDate = "release_date"
+        case runtime
+        case title
+        case video
+        case voteAverage = "vote_average"
+        case voteCount = "vote_count"
     }
 }
 

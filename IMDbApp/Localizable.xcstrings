@@ -1,6 +1,23 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@ minutes" : {
+
+    },
+    "%s minutes" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%s minutes"
+          }
+        }
+      }
+    },
+    "Hello, World!" : {
+
+    },
     "home" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -88,9 +105,6 @@
           }
         }
       }
-    },
-    "x" : {
-
     }
   },
   "version" : "1.0"

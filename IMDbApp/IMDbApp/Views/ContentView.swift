@@ -36,6 +36,9 @@ struct ContentView: View {
                 }
                 .background(Color.background)
         }
+        .task {
+            await GenreManager.shared.fetchGenres()
+        }
     }
 }
 
