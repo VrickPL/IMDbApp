@@ -19,7 +19,7 @@ struct SearchBarView: View {
                             .foregroundStyle(
                                 Color.searchBarForeground)
                     } else {
-                        Image("x.circle")
+                        Image(systemName: "x.circle")
                             .font(.title2)
                             .foregroundStyle(.white)
                             .onTapGesture {

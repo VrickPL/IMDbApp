@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var viewModel = HomeViewModel()
+    @State private var homeViewModel = HomeViewModel()
+    @State private var searchViewModel = SearchViewModel()
     @State private var shouldRefresh = false
     
     @State private var searchText = ""
@@ -29,12 +30,12 @@ struct HomeView: View {
 
             if searchText.isEmpty {
                 ScrollView {
-                    if viewModel.trendingMovies.isEmpty {
+                    if homeViewModel.trendingMovies.isEmpty {
                         CustomProgressView()
                     } else {
                         ScrollView(.horizontal) {
                             LazyHStack {
-                                ForEach(viewModel.trendingMovies.prefix(10)) { movie in
+                                ForEach(homeViewModel.trendingMovies.prefix(10)) { movie in
                                     MovieCardView(movie: movie)
                                         .padding(.trailing)
                                 }
@@ -45,33 +46,36 @@ struct HomeView: View {
                     }
                     
                     HomeCategoryView(
-                        viewModel: viewModel,
+                        viewModel: homeViewModel,
                         shouldRefresh: $shouldRefresh
                     )
                 }
                 .task {
-                    await viewModel.fetchTrendingMovies()
+                    await homeViewModel.fetchTrendingMovies()
                 }
                 .refreshable {
-                    viewModel.clearFetchedMovies()
-                    await viewModel.fetchTrendingMovies()
+                    homeViewModel.clearFetchedMovies()
+                    await homeViewModel.fetchTrendingMovies()
                     
                     shouldRefresh = true
                 }
             } else {
                 ScrollView() {
                     LazyVStack {
-                        ForEach(viewModel.searchedMovies.prefix(10)) { movie in
-                            MovieCardView(movie: movie)
-                                .padding(.trailing)
+                        ForEach(searchViewModel.searchedMovies) { movie in
+                            MovieCardDetailedView(movie: movie)
                         }
                     }
                 }
             }
         }
         .onChange(of: searchText) {
-            Task {
-                await viewModel.fetchSearchedMovies(query: searchText)
+            if searchText.isEmpty {
+                searchViewModel.clearSearchedMovies()
+            } else {
+                Task {
+                    await searchViewModel.fetchSearchedMovies(query: searchText)
+                }
             }
         }
     }

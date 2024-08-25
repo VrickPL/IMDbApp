@@ -8,8 +8,37 @@
 import SwiftUI
 
 struct SearchView: View {
+    @State private var viewModel = SearchViewModel()
+    @State private var searchText = ""
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            SearchBarView(searchText: $searchText)
+                .padding()
+
+            if !searchText.isEmpty {
+                if viewModel.searchedMovies.isEmpty {
+                    Spacer()
+                    CustomProgressView()
+                } else {
+                    ScrollView {
+                        ForEach(viewModel.searchedMovies) { movie in
+                            MovieCardDetailedView(movie: movie)
+                        }
+                    }
+                }
+            }
+            Spacer()
+        }
+        .onChange(of: searchText) {
+            if searchText.isEmpty {
+                viewModel.clearSearchedMovies()
+            } else {
+                Task {
+                    await viewModel.fetchSearchedMovies(query: searchText)
+                }
+            }
+        }
     }
 }
 

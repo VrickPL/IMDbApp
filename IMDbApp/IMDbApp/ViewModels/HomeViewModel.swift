@@ -14,14 +14,15 @@ class HomeViewModel {
     var upcomingMovies: [Movie] = []
     var trendingMovies: [Movie] = []
     var topRatedMovies: [Movie] = []
-    var searchedMovies: [Movie] = []
     
-    private let movieService = MovieService()
+    private let networkService = NetworkService()
     
     func fetchNowPlayingMovies() async {
         do {
-            let movieApiResponse: MovieResponse = try await movieService.fetchData(api: ApiConstructor(endpoint: .nowPlaying))
-            nowPlayingMovies = movieApiResponse.results
+            let movieApiResponse: MovieResponse = try await networkService.fetchData(api: ApiConstructor(endpoint: .nowPlaying))
+            DispatchQueue.main.async {
+                self.nowPlayingMovies = movieApiResponse.results
+            }
         } catch {
             print("error: \(error)")
         }
@@ -29,8 +30,10 @@ class HomeViewModel {
     
     func fetchUpcomingMovies() async {
         do {
-            let movieApiResponse: MovieResponse = try await movieService.fetchData(api: ApiConstructor(endpoint: .upcoming))
-            upcomingMovies = movieApiResponse.results
+            let movieApiResponse: MovieResponse = try await networkService.fetchData(api: ApiConstructor(endpoint: .upcoming))
+            DispatchQueue.main.async {
+                self.upcomingMovies = movieApiResponse.results
+            }
         } catch {
             print("error: \(error)")
         }
@@ -38,8 +41,10 @@ class HomeViewModel {
     
     func fetchTrendingMovies() async {
         do {
-            let movieApiResponse: MovieResponse = try await movieService.fetchData(api: ApiConstructor(endpoint: .trending))
-            trendingMovies = movieApiResponse.results
+            let movieApiResponse: MovieResponse = try await networkService.fetchData(api: ApiConstructor(endpoint: .trending))
+            DispatchQueue.main.async {
+                self.trendingMovies = movieApiResponse.results
+            }
         } catch {
             print("error: \(error)")
         }
@@ -47,18 +52,10 @@ class HomeViewModel {
     
     func fetchTopRatedMovies() async {
         do {
-            let movieApiResponse: MovieResponse = try await movieService.fetchData(api: ApiConstructor(endpoint: .topRated))
-            topRatedMovies = movieApiResponse.results
-        } catch {
-            print("error: \(error)")
-        }
-    }
-    
-    func fetchSearchedMovies(query: String) async {
-        do {
-            let parameters: [String: String] = ["query": query]
-            let movieApiResponse: MovieResponse = try await movieService.fetchData(api: ApiConstructor(endpoint: .search, parameters: parameters))
-            searchedMovies = movieApiResponse.results
+            let movieApiResponse: MovieResponse = try await networkService.fetchData(api: ApiConstructor(endpoint: .topRated))
+            DispatchQueue.main.async {
+                self.topRatedMovies = movieApiResponse.results
+            }
         } catch {
             print("error: \(error)")
         }
@@ -69,6 +66,5 @@ class HomeViewModel {
         nowPlayingMovies = []
         upcomingMovies = []
         topRatedMovies = []
-        searchedMovies = []
     }
 }
