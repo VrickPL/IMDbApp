@@ -14,6 +14,7 @@ class HomeViewModel {
     var upcomingMovies: [Movie] = []
     var trendingMovies: [Movie] = []
     var topRatedMovies: [Movie] = []
+    var searchedMovies: [Movie] = []
     
     private let movieService = MovieService()
     
@@ -53,10 +54,21 @@ class HomeViewModel {
         }
     }
     
+    func fetchSearchedMovies(query: String) async {
+        do {
+            let parameters: [String: String] = ["query": query]
+            let movieApiResponse: MovieResponse = try await movieService.fetchData(api: ApiConstructor(endpoint: .search, parameters: parameters))
+            searchedMovies = movieApiResponse.results
+        } catch {
+            print("error: \(error)")
+        }
+    }
+    
     func clearFetchedMovies() {
         trendingMovies = []
         nowPlayingMovies = []
         upcomingMovies = []
         topRatedMovies = []
+        searchedMovies = []
     }
 }

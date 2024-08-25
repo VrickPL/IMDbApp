@@ -10,6 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @State private var viewModel = HomeViewModel()
     @State private var shouldRefresh = false
+    
+    @State private var searchText = ""
 
     var body: some View {
         VStack {
@@ -22,35 +24,54 @@ struct HomeView: View {
             }
             .padding()
 
-            Text("search")
+            SearchBarView(searchText: $searchText)
+                .padding(.horizontal)
 
-            ScrollView {
-                if viewModel.trendingMovies.isEmpty {
-                    CustomProgressView()
-                } else {
-                    ScrollView(.horizontal) {
-                        LazyHStack {
-                            ForEach(viewModel.trendingMovies.prefix(10)) { movie in
-                                MovieCardView(movie: movie)
-                                    .padding(.trailing)
+            if searchText.isEmpty {
+                ScrollView {
+                    if viewModel.trendingMovies.isEmpty {
+                        CustomProgressView()
+                    } else {
+                        ScrollView(.horizontal) {
+                            LazyHStack {
+                                ForEach(viewModel.trendingMovies.prefix(10)) { movie in
+                                    MovieCardView(movie: movie)
+                                        .padding(.trailing)
+                                }
                             }
                         }
+                        .contentMargins(24, for: .scrollContent)
+                        .scrollTargetBehavior(.viewAligned)
                     }
-                    .contentMargins(24, for: .scrollContent)
-                    .scrollTargetBehavior(.viewAligned)
+                    
+                    HomeCategoryView(
+                        viewModel: viewModel,
+                        shouldRefresh: $shouldRefresh
+                    )
                 }
-
-                HomeCategoryView(
-                    viewModel: viewModel, shouldRefresh: $shouldRefresh)
+                .task {
+                    await viewModel.fetchTrendingMovies()
+                }
+                .refreshable {
+                    viewModel.clearFetchedMovies()
+                    await viewModel.fetchTrendingMovies()
+                    
+                    shouldRefresh = true
+                }
+            } else {
+                ScrollView() {
+                    LazyVStack {
+                        ForEach(viewModel.searchedMovies.prefix(10)) { movie in
+                            MovieCardView(movie: movie)
+                                .padding(.trailing)
+                        }
+                    }
+                }
             }
-            .task {
-                await viewModel.fetchTrendingMovies()
-            }
-            .refreshable {
-                viewModel.clearFetchedMovies()
-                await viewModel.fetchTrendingMovies()
-
-                shouldRefresh = true
+        }
+        .onChange(of: searchText) {
+            Task {
+                await viewModel.fetchSearchedMovies(query: searchText)
             }
         }
     }
