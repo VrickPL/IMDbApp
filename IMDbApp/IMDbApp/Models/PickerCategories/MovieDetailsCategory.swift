@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+enum MovieDetailsCategory: String, CaseIterable {
+    case aboutMovie = "about_movie"
+    case reviews = "reviews"
+}

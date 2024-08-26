@@ -28,7 +28,7 @@ enum Endpoint {
         case .genre:
             "/3/genre/movie/list"
         case .movieReviews(let movieId):
-            "/3/movie/\(movieId)reviews"
+            "/3/movie/\(movieId)/reviews"
         }
     }
     
