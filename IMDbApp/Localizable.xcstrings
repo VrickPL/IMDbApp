@@ -1,19 +1,35 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "%@ minutes" : {
+    "  |  " : {
 
     },
-    "%s minutes" : {
+    "%@ minutes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ minutes"
+          }
+        }
+      }
+    },
+    "%@/10" : {
+
+    },
+    "about_movie" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%s minutes"
+            "value" : "About Movie"
           }
         }
       }
+    },
+    "Detail" : {
+
     },
     "Hello, World!" : {
 
@@ -58,6 +74,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Popular"
+          }
+        }
+      }
+    },
+    "reviews" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reviews"
           }
         }
       }

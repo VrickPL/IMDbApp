@@ -12,12 +12,12 @@ import Observation
 class SearchViewModel {
     var searchedMovies: [Movie] = []
     
-    private let movieService = NetworkService()
+    private let neworkService = NetworkService()
     
     func fetchSearchedMovies(query: String) async {
         do {
             let parameters: [String: String] = ["query": query]
-            let movieApiResponse: MovieResponse = try await movieService.fetchData(api: ApiConstructor(endpoint: .search, parameters: parameters))
+            let movieApiResponse: MovieResponse = try await neworkService.fetchData(api: ApiConstructor(endpoint: .search, parameters: parameters))
 
             DispatchQueue.main.async {
                 self.searchedMovies = movieApiResponse.results

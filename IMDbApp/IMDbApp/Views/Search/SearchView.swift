@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchView: View {
     @State private var viewModel = SearchViewModel()
     @State private var searchText = ""
+    @State private var selectedMovie: Movie? = nil
 
     var body: some View {
         VStack {
@@ -24,11 +25,17 @@ struct SearchView: View {
                     ScrollView {
                         ForEach(viewModel.searchedMovies) { movie in
                             MovieCardDetailedView(movie: movie)
+                                .onTapGesture {
+                                    selectedMovie = movie
+                                }
                         }
                     }
                 }
             }
             Spacer()
+        }
+        .fullScreenCover(item: $selectedMovie) { movie in
+            DetailedMovieView(movie: $selectedMovie)
         }
         .onChange(of: searchText) {
             if searchText.isEmpty {

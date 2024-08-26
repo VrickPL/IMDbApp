@@ -11,6 +11,7 @@ struct HomeView: View {
     @State private var homeViewModel = HomeViewModel()
     @State private var searchViewModel = SearchViewModel()
     @State private var shouldRefresh = false
+    @State private var selectedMovie: Movie? = nil
     
     @State private var searchText = ""
 
@@ -38,6 +39,9 @@ struct HomeView: View {
                                 ForEach(homeViewModel.trendingMovies.prefix(10)) { movie in
                                     MovieCardView(movie: movie)
                                         .padding(.trailing)
+                                        .onTapGesture{
+                                            selectedMovie = movie
+                                        }
                                 }
                             }
                         }
@@ -47,7 +51,8 @@ struct HomeView: View {
                     
                     HomeCategoryView(
                         viewModel: homeViewModel,
-                        shouldRefresh: $shouldRefresh
+                        shouldRefresh: $shouldRefresh,
+                        selectedMovie: $selectedMovie
                     )
                 }
                 .task {
@@ -68,6 +73,9 @@ struct HomeView: View {
                     }
                 }
             }
+        }
+        .fullScreenCover(item: $selectedMovie) { movie in
+            DetailedMovieView(movie: $selectedMovie)
         }
         .onChange(of: searchText) {
             if searchText.isEmpty {

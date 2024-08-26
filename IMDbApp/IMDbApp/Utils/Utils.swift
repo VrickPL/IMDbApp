@@ -8,7 +8,8 @@
 import Foundation
 
 struct Utils {
-    static func getYear(from dateString: String) -> String {
+    static func getYear(from dateString: String?) -> String {
+        guard let dateString else { return "" }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let date = dateFormatter.date(from: dateString) else {

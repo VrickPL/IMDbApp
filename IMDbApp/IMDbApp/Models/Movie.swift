@@ -22,39 +22,35 @@ struct MovieResponse: Codable {
 
 // MARK: - Movie
 struct Movie: Codable, Identifiable {
-    let adult: Bool
     let backdropPath: String
     let genreIds: [Int]
     let id: Int
     let overview: String
-    let popularity: Double
     let posterPath: String
     let releaseDate: String
     let runtime: Int?
     let title: String
-    let video: Bool
     let voteAverage: Double
-    let voteCount: Int
 
     enum CodingKeys: String, CodingKey {
-        case adult
         case backdropPath = "backdrop_path"
         case genreIds = "genre_ids"
         case id
         case overview
-        case popularity
         case posterPath = "poster_path"
         case releaseDate = "release_date"
         case runtime
         case title
-        case video
         case voteAverage = "vote_average"
-        case voteCount = "vote_count"
     }
 }
 
 extension Movie {
     var imageUrlString: String {
         Endpoint.imageBaseUrl + posterPath
+    }
+
+    var backdropImageUrlString: String {
+        Endpoint.imageBaseUrl + backdropPath
     }
 }
