@@ -20,8 +20,7 @@ struct ReviewResponse: Codable {
 struct Review: Codable, Identifiable {
     let author: String
     let authorDetails: AuthorDetails?
-    let content, createdAt, id, updatedAt: String
-    let url: String
+    let content, createdAt, id: String
 
     enum CodingKeys: String, CodingKey {
         case author
@@ -29,8 +28,6 @@ struct Review: Codable, Identifiable {
         case content
         case createdAt = "created_at"
         case id
-        case updatedAt = "updated_at"
-        case url
     }
 }
 

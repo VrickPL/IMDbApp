@@ -91,9 +91,7 @@ struct ReviewView: View {
                 If you love Shawshank then it's a love that lasts a lifetime. Every viewing brings the same array of emotions - anger - revilement - happiness - sadness - inspiration and a warmth that can reduce the most hardened into misty eyed wonderment. Above all else, though, Shawshank offers hope - not just for characters in a movie - but for a better life and a better world for all of us.
                 """,
             createdAt: "2016-07-10T00:16:50.561Z",
-            id: "578193f29251417c28001764",
-            updatedAt: "2024-05-16T15:22:14.028Z",
-            url: "https://www.themoviedb.org/review/578193f29251417c28001764"
+            id: "578193f29251417c28001764"
         )
     )
 }

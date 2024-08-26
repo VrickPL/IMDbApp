@@ -57,7 +57,9 @@ struct HeaderView: View {
                 .offset(y: 0)
 
                 HStack {
-                    MovieCardView(scale: 0.7, movie: movie!, showTitle: false)
+                    if let movie = movie {
+                        MovieCardView(scale: 0.7, movie: movie, showTitle: false)
+                    }
 
                     VStack {
                         VStack {}.frame(maxHeight: .infinity)
