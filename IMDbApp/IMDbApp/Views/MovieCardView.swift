@@ -11,12 +11,14 @@ struct MovieCardView: View {
     var scale: CGFloat = 1
     let movie: Movie
     var showTitle: Bool = true
+    @State var basicCardWidth: CGFloat = 144.61
+    @State var basicCardHeight: CGFloat = 210
 
     private var cardWidth: CGFloat {
-        144.61 * scale
+        basicCardWidth * scale
     }
     private var cardHeight: CGFloat {
-        210 * scale
+        basicCardHeight * scale
     }
 
     var body: some View {

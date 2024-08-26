@@ -13,14 +13,12 @@ struct MovieCardDetailedView: View {
     private let imagesWidth: CGFloat = 20
     
     private var movieGenre: String {
-        let result = movie.genreIds
-            .compactMap { GenreManager.shared.getGenre(for: $0)?.name }
-            .joined(separator: ", ")
+        let genre = GenreManager.shared.getGenre(for: movie.genreIds.first)
         
-        return if result.isEmpty {
-            "N/A"
+        return if let genre = genre {
+            genre.name
         } else {
-            result
+            "N/A"
         }
     }
     
@@ -58,8 +56,6 @@ struct MovieCardDetailedView: View {
                     Image(systemName: "movieclapper")
                         .frame(width: imagesWidth)
                     Text(movieGenre)
-                        .lineLimit(1)
-                        .truncationMode(.tail)
                     Spacer()
                 }
 

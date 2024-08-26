@@ -57,4 +57,8 @@ extension Movie {
     var imageUrlString: String {
         Endpoint.imageBaseUrl + posterPath
     }
+
+    var backdropImageUrlString: String {
+        Endpoint.imageBaseUrl + backdropPath
+    }
 }

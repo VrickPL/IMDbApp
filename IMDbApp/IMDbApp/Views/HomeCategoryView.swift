@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeCategoryView: View {
     @State var viewModel: HomeViewModel
     @Binding var shouldRefresh: Bool
+    @Binding var selectedMovie: Movie?
 
     @State private var selectedCategory: MovieCategory = .nowPlaying
 
@@ -39,6 +40,9 @@ struct HomeCategoryView: View {
                     ForEach(moviesForSelectedCategory) { movie in
                         MovieCardView(scale: 0.7, movie: movie)
                             .padding(.bottom)
+                            .onTapGesture{
+                                selectedMovie = movie
+                            }
                     }
                 }
                 .padding(.horizontal)
@@ -85,5 +89,9 @@ struct HomeCategoryView: View {
 }
 
 #Preview {
-    HomeCategoryView(viewModel: HomeViewModel(), shouldRefresh: .constant(false))
+    HomeCategoryView(
+        viewModel: HomeViewModel(),
+        shouldRefresh: .constant(false),
+        selectedMovie: .constant(nil)
+    )
 }
