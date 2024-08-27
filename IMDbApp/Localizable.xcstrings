@@ -5,6 +5,7 @@
 
     },
     "%@ minutes" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

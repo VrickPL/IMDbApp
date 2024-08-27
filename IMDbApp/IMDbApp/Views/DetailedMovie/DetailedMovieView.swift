@@ -14,23 +14,6 @@ struct DetailedMovieView: View {
 
     @Binding var movie: Movie?
 
-    private var movieGenre: String {
-        let genre = GenreManager.shared.getGenre(for: movie?.genreIds.first)
-
-        return if let genre = genre {
-            genre.name
-        } else {
-            "N/A"
-        }
-    }
-
-    private var movieRuntime: String {
-        guard let runtime = movie?.runtime else {
-            return "N/A"
-        }
-        return String(runtime)
-    }
-
     init(movie: Binding<Movie?>) {
         self._movie = movie
 
@@ -58,14 +41,14 @@ struct DetailedMovieView: View {
                         Text("  |  ")
                             .font(.title3)
 
-                        Image(systemName: "clock")
-                        Text("\(movieRuntime) minutes")
+                        Image(systemName: "chart.line.uptrend.xyaxis")
+                        Text(Utils.getFormattedDouble(for: movie?.popularity))
 
                         Text("  |  ")
                             .font(.title3)
 
                         Image(systemName: "movieclapper")
-                        Text(movieGenre)
+                        Text(Utils.getFormattedGenre(for: movie))
                     }
                     .font(.callout)
                     .foregroundStyle(.gray)
@@ -148,8 +131,8 @@ struct DetailedMovieView: View {
                 overview:
                     "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
                 posterPath: "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+                popularity: 1,
                 releaseDate: "1994-09-23",
-                runtime: 142,
                 title: "The Shawshank Redemption",
                 voteAverage: 8.705
             )

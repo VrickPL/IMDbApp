@@ -11,23 +11,6 @@ struct MovieCardDetailedView: View {
     let movie: Movie
     
     private let imagesWidth: CGFloat = 20
-    
-    private var movieGenre: String {
-        let genre = GenreManager.shared.getGenre(for: movie.genreIds.first)
-        
-        return if let genre = genre {
-            genre.name
-        } else {
-            "N/A"
-        }
-    }
-    
-    private var movieRuntime: String {
-        guard let runtime = movie.runtime else {
-            return "N/A"
-        }
-        return String(runtime)
-    }
 
     var body: some View {
         HStack {
@@ -43,6 +26,8 @@ struct MovieCardDetailedView: View {
                         .truncationMode(.tail)
                     Spacer()
                 }
+                
+                Spacer()
 
                 HStack {
                     Image(systemName: "star")
@@ -51,11 +36,18 @@ struct MovieCardDetailedView: View {
                     Spacer()
                 }
                 .foregroundStyle(.orange)
+                
+                HStack {
+                    Image(systemName: "chart.line.uptrend.xyaxis")
+                        .frame(width: imagesWidth)
+                    Text(Utils.getFormattedDouble(for: movie.popularity))
+                    Spacer()
+                }
 
                 HStack {
                     Image(systemName: "movieclapper")
                         .frame(width: imagesWidth)
-                    Text(movieGenre)
+                    Text(Utils.getFormattedGenre(for: movie))
                     Spacer()
                 }
 
@@ -65,14 +57,8 @@ struct MovieCardDetailedView: View {
                     Text(Utils.getYear(from: movie.releaseDate))
                     Spacer()
                 }
-
-                HStack {
-                    Image(systemName: "clock")
-                        .frame(width: imagesWidth)
-                    Text("\(movieRuntime) minutes")
-                    Spacer()
-                }
             }
+            .frame(height: 130)
         }
         .padding()
     }
@@ -87,8 +73,8 @@ struct MovieCardDetailedView: View {
             overview:
                 "Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison, where he puts his accounting skills to work for an amoral warden. During his long stretch in prison, Dufresne comes to be admired by the other inmates -- including an older prisoner named Red -- for his integrity and unquenchable sense of hope.",
             posterPath: "/9cqNxx0GxF0bflZmeSMuL5tnGzr.jpg",
+            popularity: 1,
             releaseDate: "1994-09-23",
-            runtime: 142,
             title: "The Shawshank Redemption",
             voteAverage: 8.705
         )

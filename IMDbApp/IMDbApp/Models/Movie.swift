@@ -27,8 +27,8 @@ struct Movie: Codable, Identifiable {
     let id: Int
     let overview: String
     let posterPath: String
+    let popularity: Double
     let releaseDate: String
-    let runtime: Int?
     let title: String
     let voteAverage: Double
 
@@ -38,8 +38,8 @@ struct Movie: Codable, Identifiable {
         case id
         case overview
         case posterPath = "poster_path"
+        case popularity
         case releaseDate = "release_date"
-        case runtime
         case title
         case voteAverage = "vote_average"
     }
@@ -61,8 +61,8 @@ extension Movie {
             id: id,
             overview: overview,
             posterPath: posterPath,
+            popularity: popularity,
             releaseDate: releaseDate,
-            runtime: runtime,
             title: title,
             voteAverage: voteAverage
         )

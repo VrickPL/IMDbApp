@@ -15,8 +15,8 @@ class MovieData: Identifiable, Equatable {
     var id: Int
     var overview: String
     var posterPath: String
+    var popularity: Double
     var releaseDate: String
-    var runtime: Int?
     var title: String
     var voteAverage: Double
     
@@ -26,8 +26,8 @@ class MovieData: Identifiable, Equatable {
         id: Int,
         overview: String,
         posterPath: String,
+        popularity: Double,
         releaseDate: String,
-        runtime: Int? = nil,
         title: String,
         voteAverage: Double
     ) {
@@ -36,8 +36,8 @@ class MovieData: Identifiable, Equatable {
         self.id = id
         self.overview = overview
         self.posterPath = posterPath
+        self.popularity = popularity
         self.releaseDate = releaseDate
-        self.runtime = runtime
         self.title = title
         self.voteAverage = voteAverage
     }
@@ -49,8 +49,8 @@ class MovieData: Identifiable, Equatable {
             id: id,
             overview: overview,
             posterPath: posterPath,
+            popularity: popularity,
             releaseDate: releaseDate,
-            runtime: runtime,
             title: title,
             voteAverage: voteAverage
         )
