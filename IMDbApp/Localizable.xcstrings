@@ -29,10 +29,25 @@
       }
     },
     "Detail" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detail"
+          }
+        }
+      }
     },
-    "Hello, World!" : {
-
+    "empty_watch_list" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your watch list is empty!"
+          }
+        }
+      }
     },
     "home" : {
       "extractionState" : "manual",

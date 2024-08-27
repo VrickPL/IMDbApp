@@ -5,12 +5,14 @@
 //  Created by Jan Kazubski on 26/08/2024.
 //
 
+import SwiftData
 import SwiftUI
 
 struct DetailedMovieView: View {
-    @Binding var movie: Movie?
+    @Environment(\.modelContext) private var context
+    @Query private var watchList: [MovieData]
 
-    @State private var isInWatchList = false
+    @Binding var movie: Movie?
 
     private var movieGenre: String {
         let genre = GenreManager.shared.getGenre(for: movie?.genreIds.first)
@@ -71,7 +73,7 @@ struct DetailedMovieView: View {
                     .truncationMode(.tail)
 
                     DetailedMovieCategoryView(movie: movie)
-                    .padding(.top, 20)
+                        .padding(.top, 20)
                 }
                 .offset(y: aboutMovieOffsetY)
                 .padding(.horizontal, 32)
@@ -90,8 +92,11 @@ struct DetailedMovieView: View {
             .navigationBarTitle("Detail", displayMode: .inline)
             .navigationBarItems(
                 trailing: Button {
-                    // TODO: SwiftData add or remove from watchList
-                    isInWatchList.toggle()
+                    if isInWatchList {
+                        removeFromWatchList()
+                    } else {
+                        addToWatchList()
+                    }
                 } label: {
                     Image(
                         systemName: isInWatchList ? "bookmark.fill" : "bookmark"
@@ -108,6 +113,28 @@ struct DetailedMovieView: View {
 
     private var aboutMovieOffsetY: CGFloat {
         return screenHeight * 0.1
+    }
+
+    private var isInWatchList: Bool {
+        return if let movie = movie {
+            watchList.contains(where: { $0.id == movie.id })
+        } else {
+            false
+        }
+    }
+
+    private func addToWatchList() {
+        if let movie = movie {
+            context.insert(movie.toMovieData())
+        }
+    }
+
+    private func removeFromWatchList() {
+        if let movie = movie {
+            if let movieDataToRemove = watchList.first(where: { $0.id == movie.id }) {
+                context.delete(movieDataToRemove)
+            }
+        }
     }
 }
 

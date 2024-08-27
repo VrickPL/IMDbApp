@@ -30,6 +30,10 @@ struct SearchView: View {
                                 }
                         }
                     }
+                    .refreshable {
+                        viewModel.clearSearchedMovies()
+                        await viewModel.fetchSearchedMovies(query: searchText)
+                    }
                 }
             }
             Spacer()
