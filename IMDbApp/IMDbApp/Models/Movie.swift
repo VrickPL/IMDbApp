@@ -53,4 +53,18 @@ extension Movie {
     var backdropImageUrlString: String {
         Endpoint.imageBaseUrl + backdropPath
     }
+    
+    func toMovieData() -> MovieData {
+        return MovieData(
+            backdropPath: backdropPath,
+            genreIds: genreIds,
+            id: id,
+            overview: overview,
+            posterPath: posterPath,
+            releaseDate: releaseDate,
+            runtime: runtime,
+            title: title,
+            voteAverage: voteAverage
+        )
+    }
 }

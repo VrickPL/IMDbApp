@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct IMDbAppApp: App {
@@ -13,5 +14,6 @@ struct IMDbAppApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: MovieData.self)
     }
 }
