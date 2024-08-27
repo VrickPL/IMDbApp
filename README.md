@@ -5,11 +5,11 @@
 This app enables users to browse and search for movies, view detailed movie information, and refresh data in real time. It’s built using modern iOS development practices, utilizing **SwiftData** for local storage, **async/await** for smooth asynchronous operations, and follows the **MVVM** architecture to ensure clean, modular code. The app also integrates design patterns. The user interface is primarily based on a **Figma** design, with a few custom adjustments made to improve the user experience.
 
 ## Table of contents 
-- [Used technologies, libraries and important links](https://github.com/VrickPL/IMDbApp/edit/main/README.md#used-technologies-libraries-and-important-links)
-- [Home](https://github.com/VrickPL/IMDbApp/edit/main/README.md#home)
-- [Movie Details](https://github.com/VrickPL/IMDbApp/edit/main/README.md#movie-details)
-- [Search](https://github.com/VrickPL/IMDbApp/edit/main/README.md#search)
-- [Watch list](https://github.com/VrickPL/IMDbApp/edit/main/README.md#watch-list)
+- [Used technologies, libraries and important links](https://github.com/VrickPL/IMDbApp#used-technologies-libraries-and-important-links)
+- [Home](https://github.com/VrickPL/IMDbApp#home)
+- [Movie Details](https://github.com/VrickPL/IMDbApp#movie-details)
+- [Search](https://github.com/VrickPL/IMDbApp#search)
+- [Watch list](https://github.com/VrickPL/IMDbApp#watch-list)
 
 ## Used technologies, libraries and important links
 - **[Swift](https://www.swift.org/documentation/)**,  
